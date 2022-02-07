@@ -9,9 +9,23 @@ public class CombinatorPattern {
         CustomerV2 customer = new CustomerV2(
                 "John",
                 "+012345679",
-                "john@gmail.com",
+                "johngmail.com",
                 LocalDate.of(1980, 1, 1));
 
+        // Normal validation
         System.out.println(new CustomerValidatorService().isValid(customer));
+
+        // Validation using combinator pattern with Function class
+        ValidationResult result = CustomerValidatorCombinator
+                .isEmailValid()
+                .and(CustomerValidatorCombinator.isPhoneNumberValid())
+                .and(CustomerValidatorCombinator.isAdult())
+                .apply(customer);
+
+        if (result != ValidationResult.SUCCESS) {
+            throw new IllegalStateException(result.name());
+        }
+
+        System.out.println(result);
     }
 }

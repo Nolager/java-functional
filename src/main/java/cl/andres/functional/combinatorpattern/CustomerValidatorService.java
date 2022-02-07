@@ -5,6 +5,11 @@ import cl.andres.functional.model.CustomerV2;
 import java.time.LocalDate;
 import java.time.Period;
 
+/**
+ * Normal class to validate data of Customer.
+ *
+ * There's another efficient way to do this validation using combinator pattern CustomerValidatorCombinator.
+ */
 public class CustomerValidatorService {
 
     private boolean isEmailValid(String email) {
